@@ -3,7 +3,7 @@ name: Dropi Worker Node 2 (Cloud Shards 4-7)
 on:
   schedule:
     # Corre cada 2 horas en el minuto 00 (15 min antes del Consolidador Principal)
-    - cron: '0 */2 * * *'
+    - cron: '0 1-23/2 * * *'
   workflow_dispatch:
     inputs:
       pages:
