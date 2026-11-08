@@ -9,11 +9,11 @@ on:
       pages:
         description: 'Cantidad de páginas a escanear (1730 = Catálogo Completo)'
         required: true
-        default: '1730'
+        default: '560'
 
 concurrency:
   group: dropi-worker2-scanner
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -59,7 +59,7 @@ jobs:
           DROPI_TOKEN: ${{ secrets.DROPI_TOKEN_1 || secrets.DROPI_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: |
-          python cloud_worker.py --shard-id ${{ matrix.shard }} --total-shards 8 --pages ${{ github.event.inputs.pages || '1730' }} --token-index ${{ matrix.token_index }} --db-name catalog_shard_${{ matrix.shard }}.db
+          python cloud_worker.py --shard-id ${{ matrix.shard }} --total-shards 8 --pages ${{ github.event.inputs.pages || '560' }} --token-index ${{ matrix.token_index }} --db-name catalog_shard_${{ matrix.shard }}.db
 
       - name: Subir Base de Datos del Shard
         uses: actions/upload-artifact@v4
